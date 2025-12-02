@@ -5,27 +5,65 @@ Simple RAG (Retrieval-Augmented Generation) app that:
 - Stores embeddings in PostgreSQL with pgvector
 - Answers questions using an LLM via OpenRouter
 
-## Setup
+## Clone repo
 
-### 1. Clone & enter folder
+git clone https://github.com/Ivank100/SP1.git
+cd SP1
 
-```bash
-git clone https://github.com/<your-username>/notebooklm-clone.git
-cd notebooklm-clone
-Create venv & install deps:
-python -m venv venv
-source venv/bin/activate.fish   # fish shell
+## Create Enviroment 
+
+python3.12 -m venv env312
+source env312/bin/activate (activate.fish if using fish shell)
+
+## Install dependecies
+pip install --upgrade pip
 pip install -r requirements.txt
-set -x DEEPSEEK_API_KEY "YOUR_OPENROUTER_API_KEY"
-set -x DEEPSEEK_BASE_URL "https://openrouter.ai/api/v1"
 
-set -x PG_HOST "localhost"
-set -x PG_PORT "5432"
-set -x PG_DB   "your_db_name"
-set -x PG_USER "your_db_user"
-set -x PG_PASS "your_db_password"
-4. Usage
-python -m src.rag_index uploads/Story.pdf
-python -m src.rag_query
-Question (empty to quit): Summarize the story.
+
+## Create .env file in root folder
+Example code:
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=notebooklm
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+PGVECTOR_DIM=1536
+
+DEEPSEEK_API_KEY=your-real-api-key-here
+DEEPSEEK_BASE_URL=https://openrouter.ai/api/v1
+
+## Start Postgres with Docker
+docker compose up -d
+docker ps (To check if its running)
+
+
+## HOW TO USE
+
+Download any PDF or MP3 file
+Activate your enviroment with: source env312/bin/activate 
+Ingest a PDF: python -m src.rag_index path/to/your_document.pdf
+
+You should see:
+[INFO] Reading PDF: path/to/your_document.pdf
+[INFO] Extracted 36783 characters of text from PDF: path/to/your_document.pdf
+[INFO] Created 29 chunks
+[INFO] Embedding 29 chunks (pure Python, very light)...
+[SUCCESS] Ingested pdf path/to/your_document.pdf as doc_id=... , 29 chunks
+
+Copy the doc_id and paste it into testnotebooklm.py
+
+do the same for audio 
+
+then run python testnotebooklm.py
+
+Ask questions to chatbot about your pdf or audio and enjoy
+
+
+
+
+
+
+
+
+
 
