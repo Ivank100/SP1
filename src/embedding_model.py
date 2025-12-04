@@ -1,4 +1,4 @@
-# src/embedding_model.py
+
 from typing import List
 import math
 import re
@@ -21,7 +21,7 @@ def _text_to_vector(text: str, dim: int) -> List[float]:
         idx = hash(tok) % dim
         vec[idx] += 1.0
 
-    # L2 normalization
+    #normalization
     norm = math.sqrt(sum(v * v for v in vec))
     if norm > 0:
         vec = [v / norm for v in vec]
