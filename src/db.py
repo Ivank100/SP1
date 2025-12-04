@@ -1,4 +1,4 @@
-# src/db.py
+
 import psycopg
 from typing import List, Optional
 from .config import PG_HOST, PG_PORT, PG_DB, PG_USER, PG_PASS
@@ -30,12 +30,12 @@ def search_similar(
     top_k: int = 5,
     doc_ids: Optional[List[str]] = None,
 ):
-    # Turn [0.1, 0.2, ...] into a pgvector literal string: "[0.1,0.2,...]"
+    
     vec_str = "[" + ",".join(f"{x:.6f}" for x in query_emb) + "]"
 
     with get_conn() as conn, conn.cursor() as cur:
         if doc_ids:
-            # search only within the given documents
+            
             cur.execute(
                 """
                 SELECT content
@@ -47,7 +47,7 @@ def search_similar(
                 (doc_ids, vec_str, top_k),
             )
         else:
-            # old behavior: search across everything
+            
             cur.execute(
                 """
                 SELECT content
