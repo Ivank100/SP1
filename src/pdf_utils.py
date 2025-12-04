@@ -1,5 +1,5 @@
 # src/pdf_utils.py
-import fitz  # PyMuPDF
+import fitz  
 from typing import List
 
 def extract_text_from_pdf(path: str) -> str:
@@ -14,7 +14,7 @@ def chunk_text(text: str, max_chars: int = 1500, overlap: int = 200) -> List[str
     chunks = []
     start = 0
 
-    # guard: avoid bad parameters
+  
     if max_chars <= 0:
         raise ValueError("max_chars must be > 0")
     if overlap >= max_chars:
@@ -24,11 +24,11 @@ def chunk_text(text: str, max_chars: int = 1500, overlap: int = 200) -> List[str
         end = min(len(text), start + max_chars)
         chunks.append(text[start:end])
 
-        # if we've reached the end, stop
+        
         if end >= len(text):
             break
 
-        # move start forward with overlap
+        
         start = end - overlap
 
     return chunks
