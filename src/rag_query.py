@@ -1,4 +1,4 @@
-# src/rag_query.py
+
 from .deepseek_client import DeepSeekClient
 from .db import search_similar
 from .embedding_model import embed_texts
@@ -13,10 +13,10 @@ def answer_question(
 ) -> str:
     client = DeepSeekClient()
 
-    # 1) embed question locally
+    
     [q_emb] = embed_texts([question])
 
-    # 2) retrieve similar chunks from Postgres
+    
     contexts = search_similar(q_emb, top_k=top_k, doc_ids=doc_ids)
 
     if not contexts:
@@ -24,7 +24,7 @@ def answer_question(
 
     context_text = "\n\n".join(contexts)
 
-    # 3) call DeepSeek chat for the actual answer
+    
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": f"Context:\n{context_text}\n\nQuestion: {question}"},
@@ -36,5 +36,5 @@ if __name__ == "__main__":
         q = input("Question (empty to quit): ").strip()
         if not q:
             break
-        print("Answer:\n", answer_question(q))  # doc_ids=None => all docs
+        print("Answer:\n", answer_question(q))  
         print()
