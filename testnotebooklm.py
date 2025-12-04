@@ -1,9 +1,9 @@
-# notebooklm.py
+
 from src.rag_query import answer_question
 
-# 🔧 Replace these with your real doc_ids:
-PDF_DOC_ID = "e3f9d4c0-dff5-4ee7-af6e-bbfd7866d1fe"   # <- your PDF doc_id
-AUDIO_DOC_ID = "ae094b7b-7c5e-48ba-9c77-7ae52490ce66"                # <- fill in after ingest
+
+PDF_DOC_ID = "e3f9d4c0-dff5-4ee7-af6e-bbfd7866d1fe"   
+AUDIO_DOC_ID = "ae094b7b-7c5e-48ba-9c77-7ae52490ce66"                
 
 
 def chat_session(label: str, doc_id: str):
@@ -15,7 +15,7 @@ def chat_session(label: str, doc_id: str):
 
     while True:
         q = input("Q: ").strip()
-        if not q:  # empty line → exit this chat session
+        if not q:  
             print("\nLeaving session...\n")
             return
 
