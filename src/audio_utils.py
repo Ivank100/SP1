@@ -1,16 +1,13 @@
-# src/audio_utils.py
+
 import os
 import whisper
 
-# you can change this to "base" or "small" later if you want better quality
+
 DEFAULT_WHISPER_MODEL = "tiny"
 
 _model_cache = None
 
 def _get_model(model_name: str = DEFAULT_WHISPER_MODEL):
-    """
-    Lazy-load Whisper model once and reuse it.
-    """
     global _model_cache
     if _model_cache is None:
         print(f"[INFO] Loading Whisper model: {model_name}")
