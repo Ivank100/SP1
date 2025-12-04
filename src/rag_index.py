@@ -5,10 +5,10 @@ import os
 from .pdf_utils import extract_text_from_pdf, chunk_text
 from .embedding_model import embed_texts
 from .db import insert_chunks
-from .audio_utils import transcribe_audio  # <-- NEW
+from .audio_utils import transcribe_audio  
 
-MAX_CHUNKS_FOR_V0 = 80  # safe for your size
-AUDIO_EXTS = {".mp3", ".wav", ".m4a", ".flac", ".ogg"}  # you can add more
+MAX_CHUNKS_FOR_V0 = 80  
+AUDIO_EXTS = {".mp3", ".wav", ".m4a", ".flac", ".ogg"}  
 
 
 def _ingest_text_source(label: str, path: str, raw_text: str):
@@ -18,7 +18,7 @@ def _ingest_text_source(label: str, path: str, raw_text: str):
         print(f"[ERROR] No text found in {label}: {path}")
         return
 
-    # chunk text
+    
     chunks = chunk_text(raw_text)
     print(f"[INFO] Created {len(chunks)} chunks")
 
